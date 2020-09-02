@@ -71,7 +71,7 @@ def solve(board):
     return  False
 
 
-print_board(board)
-solve(board)
-print('****************************')
-print_board(board)
+# print_board(board)
+# solve(board)
+# print('****************************')
+# print_board(board)

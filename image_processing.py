@@ -45,16 +45,22 @@ def preprocess_crop_image(path):
 
 
 def classify_image(image):
-    model = load_model('model_for_digits.h5')
+    model = load_model('digit_recognisor.h5')
     model.compile(loss='binary_crossentropy',metrics=['accuracy'],optimizer='adam')
-   # print(image.shape)
-    image = cv2.resize(image,(28,28))
-    #print(image.shape)
-    image = image.reshape(1,28,28,1)
-    #print(image.shape)
-    pred = model.predict_classes(image)
-    print(pred[0])
-    return pred[0]
+    img = cv2.resize(image, (32, 32))
+    #img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = img / 255
+    image = img.reshape(1, 32, 32, 1)
+    classInx = int(model.predict_classes(image))
+    pred = model.predict(image)
+    probVal = np.amax(pred)
+    if(probVal>0.95):
+        pred1 = classInx
+        print(probVal)
+    else:
+        pred1 = 0
+        print(probVal)
+    return pred1
 
 
 def grid_to_metrix(path_of_image):
@@ -65,27 +71,37 @@ def grid_to_metrix(path_of_image):
     for i in range(9):
         for j in range(9):
             digit_image = image_resized[i * 50:(i + 1) * 50,
-                          j * 50:(j + 1) * 50]  # size of image is 450 ie each cell is 50
-            print(digit_image.sum())
-            grey = cv2.cvtColor(digit_image, cv2.COLOR_BGR2GRAY)
-            blur = cv2.GaussianBlur(grey, (11, 11), 0)
-            digit_image = cv2.adaptiveThreshold(blur, 255, 1, 1, 11, 2)
+                          j * 50:(j + 1) * 50]
+            digit_image = digit_image[8:46,10:45]  # size of image is 450 ie each cell is 50
+            temp = cv2.resize(digit_image, (32, 32), interpolation=cv2.INTER_AREA)
+            temp = temp[4:-4, 4:-4]
+            temp = cv2.resize(temp, (32, 32), interpolation=cv2.INTER_AREA)
+            grey1 = cv2.cvtColor(digit_image, cv2.COLOR_BGR2GRAY)
+            
+            # while True:
+            #     cv2.imshow('1',grey1)
+            #     if(cv2.waitKey(1)==27):
+            #         break
+            grid[i][j] = classify_image(grey1)
+            
+            #blur = cv2.GaussianBlur(grey, (11, 11), 0)
+            #digit_image = cv2.adaptiveThreshold(blur, 255, 1, 1, 11, 2)
 
-            digit_image = digit_image[8:46,10:45]
-            wh = np.sum(digit_image==255)
-            while True:
-                cv2.imshow('1',digit_image)
-                if(cv2.waitKey(1)==27):
-                    break
+            
+            #wh = np.sum(digit_image==255)
+            # while True:
+            #     cv2.imshow('1',digit_image)
+            #     if(cv2.waitKey(1)==27):
+            #         break
 
-            if wh > 20:
-                grid[i][j] = classify_image(digit_image)
-            else:
-                grid[i][j] = 0
+            # if wh > 20:
+            #     grid[i][j] = classify_image(digit_image)
+            # else:
+            #     grid[i][j] = 0
 
     grid = grid.astype(int)
     return  grid
 
-grid = grid_to_metrix('sudoku_1.jpg')
+grid = grid_to_metrix('1585983417996470071301219931038.jpg')
 
 print(grid)
