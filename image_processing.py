@@ -54,7 +54,7 @@ def classify_image(image):
     classInx = int(model.predict_classes(image))
     pred = model.predict(image)
     probVal = np.amax(pred)
-    if(probVal>0.95):
+    if(probVal>0.85):
         pred1 = classInx
         print(probVal)
     else:
@@ -77,15 +77,19 @@ def grid_to_metrix(path_of_image):
             temp = temp[4:-4, 4:-4]
             temp = cv2.resize(temp, (32, 32), interpolation=cv2.INTER_AREA)
             grey1 = cv2.cvtColor(digit_image, cv2.COLOR_BGR2GRAY)
+            temp_for_null = cv2.GaussianBlur(grey1, (15, 15), 0)
+            temp_for_null = cv2.adaptiveThreshold(grey1, 255, 1, 1, 11, 2)
             
             # while True:
             #     cv2.imshow('1',grey1)
             #     if(cv2.waitKey(1)==27):
             #         break
-            grid[i][j] = classify_image(grey1)
-            
-            #blur = cv2.GaussianBlur(grey, (11, 11), 0)
-            #digit_image = cv2.adaptiveThreshold(blur, 255, 1, 1, 11, 2)
+            wh = np.sum(temp_for_null==255)
+            print(wh)
+            if wh>150:
+                grid[i][j] = classify_image(grey1)
+            else:
+                grid[i][j] = 0
 
             
             #wh = np.sum(digit_image==255)
@@ -102,6 +106,6 @@ def grid_to_metrix(path_of_image):
     grid = grid.astype(int)
     return  grid
 
-grid = grid_to_metrix('1585983417996470071301219931038.jpg')
+grid = grid_to_metrix('sudoku_1.jpg')
 
 print(grid)
