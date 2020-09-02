@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import operator
 from keras.models import  load_model
-
+import algo 
 
 def distance(p1, p2):
     x = p2[0] - p1[0]
@@ -54,7 +54,7 @@ def classify_image(image):
     classInx = int(model.predict_classes(image))
     pred = model.predict(image)
     probVal = np.amax(pred)
-    if(probVal>0.85):
+    if(probVal>0.86):
         pred1 = classInx
         print(probVal)
     else:
@@ -77,11 +77,11 @@ def grid_to_metrix(path_of_image):
             temp = temp[4:-4, 4:-4]
             temp = cv2.resize(temp, (32, 32), interpolation=cv2.INTER_AREA)
             grey1 = cv2.cvtColor(digit_image, cv2.COLOR_BGR2GRAY)
-            temp_for_null = cv2.GaussianBlur(grey1, (15, 15), 0)
+            temp_for_null = cv2.GaussianBlur(grey1, (21, 21), 0)
             temp_for_null = cv2.adaptiveThreshold(grey1, 255, 1, 1, 11, 2)
             
             # while True:
-            #     cv2.imshow('1',grey1)
+            #     cv2.imshow('1',temp_for_null)
             #     if(cv2.waitKey(1)==27):
             #         break
             wh = np.sum(temp_for_null==255)
@@ -92,20 +92,15 @@ def grid_to_metrix(path_of_image):
                 grid[i][j] = 0
 
             
-            #wh = np.sum(digit_image==255)
-            # while True:
-            #     cv2.imshow('1',digit_image)
-            #     if(cv2.waitKey(1)==27):
-            #         break
-
-            # if wh > 20:
-            #     grid[i][j] = classify_image(digit_image)
-            # else:
-            #     grid[i][j] = 0
 
     grid = grid.astype(int)
     return  grid
 
-grid = grid_to_metrix('sudoku_1.jpg')
+grid = grid_to_metrix('1585983417996470071301219931038.jpg')
 
 print(grid)
+if algo.solve(grid) :
+    print('#'*34+'\nSolved ans is : ')
+    algo.print_board(grid)
+else:
+    print("Detection Error!")
