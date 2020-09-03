@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 
-<h2>Image Classifier</h2>
+<h2>Solve Sudoku With A.I.</h2>
 
 <div>
     <form id="upload-file" method="post" enctype="multipart/form-data">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div>
-            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
+            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Solve!</button>
         </div>
     </div>
 
@@ -27,5 +27,24 @@
     </h3>
 
 </div>
-
+ <div style="float:right" class="RightMain"><div id="Rightmenu">
+            <div class="titlebox"><div class="text"><?php echo NOM_SITE;?></div></div>
+            <h4>Intructions:-</h4>
+            <ul>
+                <li>Ensure that image of Sudoku is bright and clear.</li>
+                <li>Majority of image should cover Sudoku.</li>
+                <li>Refer the following image for clearity.</li>
+            </ul>
+            <img style="padding-left: 50px;" src="{{url_for('static', filename='1.jpeg')}}" alt="Example image to be uploaded"width="200" height="200">
+</div>
+</div>
+<div style="position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  margin: 0 auto;
+  text-align:center;
+  padding:0;">
+Made with <span style="color: #e25555;" >&#9829;</span> by <a href="https://www.linkedin.com/in/pushkara-sharma/">Pushkara Sharma</a> 
+</div>
 {% endblock %}

@@ -20,7 +20,7 @@ def detect_solve(path):
     if algo.solve(grid) :
         print('#'*34+'\nSolved ans is : ')
         algo.print_board(grid)
-        return 'Solved'
+        return grid
     else:
         print("Detection Error!")
         return 'Detection Error!'
