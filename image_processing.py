@@ -67,6 +67,7 @@ def grid_to_metrix(path_of_image):
     crop_image = preprocess_crop_image(path_of_image)
 
     image_resized = cv2.resize(crop_image, (450, 450))
+    image_resized = cv2.fastNlMeansDenoisingColored(image_resized,None,10,10,7,21)
     grid = np.zeros([9, 9])
     for i in range(9):
         for j in range(9):
@@ -86,7 +87,7 @@ def grid_to_metrix(path_of_image):
             #         break
             wh = np.sum(temp_for_null==255)
             print(wh)
-            if wh>150:
+            if wh>100:
                 grid[i][j] = classify_image(grey1)
             else:
                 grid[i][j] = 0
