@@ -7,6 +7,7 @@ Created on Thu Sep  3 17:22:24 2020
 """
 from flask import Flask, redirect, url_for, request, render_template
 from werkzeug.utils import secure_filename
+from gevent.pywsgi import WSGIServer
 import os
 from image_processing import grid_to_metrix
 import algo 
@@ -53,4 +54,4 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
