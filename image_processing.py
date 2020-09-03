@@ -48,7 +48,6 @@ def classify_image(image):
     model = load_model('digit_recognisor.h5')
     model.compile(loss='binary_crossentropy',metrics=['accuracy'],optimizer='adam')
     img = cv2.resize(image, (32, 32))
-    #img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = img / 255
     image = img.reshape(1, 32, 32, 1)
     classInx = int(model.predict_classes(image))
@@ -56,10 +55,10 @@ def classify_image(image):
     probVal = np.amax(pred)
     if(probVal>0.86):
         pred1 = classInx
-        print(probVal)
+        #print(probVal)
     else:
         pred1 = 0
-        print(probVal)
+        #print(probVal)
     return pred1
 
 
@@ -97,11 +96,11 @@ def grid_to_metrix(path_of_image):
     grid = grid.astype(int)
     return  grid
 
-grid = grid_to_metrix('1585983417996470071301219931038.jpg')
+#grid = grid_to_metrix('1585983417996470071301219931038.jpg')
 
-print(grid)
-if algo.solve(grid) :
-    print('#'*34+'\nSolved ans is : ')
-    algo.print_board(grid)
-else:
-    print("Detection Error!")
+#print(grid)
+# if algo.solve(grid) :
+#     print('#'*34+'\nSolved ans is : ')
+#     algo.print_board(grid)
+# else:
+#     print("Detection Error!")
