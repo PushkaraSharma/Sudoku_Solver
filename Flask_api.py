@@ -5,26 +5,16 @@ Created on Thu Sep  3 17:22:24 2020
 
 @author: pushkara
 """
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask,send_file, request, render_template
 from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
 import os
-from image_processing import grid_to_metrix
-import algo 
-
+from image_processing import print_to_image
+from io import StringIO
+import cv2
 
 app = Flask(__name__)
 
-def detect_solve(path):
-    grid = grid_to_metrix(path)
-    if algo.solve(grid) :
-        print('#'*34+'\nSolved ans is : ')
-        algo.print_board(grid)
-        return grid
-    else:
-        print("Detection Error!")
-        return 'Detection Error!'
-    
 
 @app.route('/', methods=['GET'])
 def index():
@@ -45,10 +35,14 @@ def upload():
         f.save(file_path)
 
         # Make prediction
-        grid = detect_solve(file_path)
-        
-        result = str(grid)               # Convert to string
-        return result
+        output = print_to_image(file_path)
+        if(type(output)==str):
+            return send_file('outputs/error.png')
+        else:
+            cv2.imwrite('outputs/'+f.filename+'.jpg', output)
+            return send_file('outputs/'+f.filename+'.jpg')
+
+           
     return None
 
 

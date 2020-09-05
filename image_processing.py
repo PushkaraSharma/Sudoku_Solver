@@ -65,9 +65,13 @@ def classify_image(image):
 def grid_to_metrix(path_of_image):
     crop_image = preprocess_crop_image(path_of_image)
 
-    image_resized = cv2.resize(crop_image, (450, 450))
-    image_resized = cv2.fastNlMeansDenoisingColored(image_resized,None,10,10,7,21)
+    global image_final,temp1,temp2
+    image_final = cv2.resize(crop_image, (450, 450))
+    image_resized = cv2.fastNlMeansDenoisingColored(image_final,None,10,10,7,21)
     grid = np.zeros([9, 9])
+    
+    temp1 = []
+    temp2 = []
     for i in range(9):
         for j in range(9):
             digit_image = image_resized[i * 50:(i + 1) * 50,
@@ -87,20 +91,35 @@ def grid_to_metrix(path_of_image):
             wh = np.sum(temp_for_null==255)
             print(wh)
             if wh>100:
-                grid[i][j] = classify_image(grey1)
+                pred = classify_image(grey1)
+                grid[i][j] = pred
+                if(pred==0):
+                    temp1.append(i)
+                    temp2.append(j)
             else:
                 grid[i][j] = 0
+                temp1.append(i)
+                temp2.append(j)
 
             
 
     grid = grid.astype(int)
     return  grid
 
-#grid = grid_to_metrix('1585983417996470071301219931038.jpg')
 
-#print(grid)
-# if algo.solve(grid) :
-#     print('#'*34+'\nSolved ans is : ')
-#     algo.print_board(grid)
-# else:
-#     print("Detection Error!")
+def print_to_image(path):
+    grid = grid_to_metrix(path)
+    if algo.solve(grid) :
+       # algo.print_board(grid)
+        t=0
+        for i in range(9):
+            for j in range(9):
+                if(t<len(temp1)):
+                    if(i==temp1[t] and j==temp2[t]):
+                        x = j*50+10
+                        y = i*50+40
+                        cv2.putText(image_final,str(grid[i][j]), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255),2)
+                        t+=1
+        return image_final
+    else:
+        return "Detection Error!"
