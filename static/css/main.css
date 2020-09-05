@@ -7,6 +7,10 @@
     margin-top: 1em;
     margin-bottom: 1em;    
 }
+.container{
+    display: flex;
+    flex-direction: column;
+}
 
 .img-preview>div {
     width: 100%;
