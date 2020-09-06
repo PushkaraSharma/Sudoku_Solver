@@ -44,9 +44,10 @@ $(document).ready(function () {
             success: function (data) {
                 // Get and display the result
                 $('.loader').hide();
+                
+                $('#result').text(' Result:');
+                $('#result').append('<img id="theImg" src="/static/outputs/1.jpeg.jpg" />')
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:' + data);
-
                 console.log('Success!');
             },
         });
