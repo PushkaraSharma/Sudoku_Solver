@@ -1,50 +1,57 @@
 {% extends "base.html" %} {% block content %}
 
 <h2>Solve Sudoku With A.I.</h2>
-<div class="container">
-<div class="LeftMain">
-    <form id="upload-file" method="post" enctype="multipart/form-data">
-        <label for="imageUpload" class="upload-label">
-            Choose...
-        </label>
-        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
-    </form>
+<div class="CenterMain">
+    <div class="LeftMain">
+        <form id="upload-file" method="post" enctype="multipart/form-data">
+            <label for="imageUpload" class="upload-label">
+                Choose...
+            </label>
+            <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+        </form>
 
-    <div class="image-section" style="display:none;">
-        <div class="img-preview">
-            <div id="imagePreview">
+        <div class="image-section" style="display:none;">
+            <div class="img-preview">
+                <div id="imagePreview">
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Solve!</button>
             </div>
         </div>
-        <div>
-            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Solve!</button>
-        </div>
+
+        <div class="loader" style="display:none;"></div>
+
+        <h3 id="result">
+            <span id="output1"> </span>
+        </h3>
+
     </div>
-
-    <div class="loader" style="display:none;"></div>
-
-    <h3 id="result">
-        <span id="output1"> </span>
-    </h3>
-
-</div>
- <div class="RightMain"><div id="Rightmenu">
-            <div class="titlebox"><div class="text"><?php echo NOM_SITE;?></div></div>
+    <div class="RightMain">
+        <div id="Rightmenu">
+            <div class="titlebox">
+                <div class="text"><?php echo NOM_SITE;?></div>
+            </div>
             <h4>Intructions:-</h4>
             <ul>
                 <li>Ensure that image of Sudoku is bright and clear.</li>
                 <li>Majority of image should cover Sudoku.</li>
                 <li>Refer the following image for clearity.</li>
             </ul>
-            <img style="padding-left: 50px;" src="{{url_for('static', filename='1.jpeg')}}" alt="Example image to be uploaded"width="200" height="200">
+            <img style="padding-left: 50px;" src="{{url_for('static', filename='1.jpeg')}}"
+                alt="Example image to be uploaded" width="200" height="200">
+        </div>
+    </div>
 </div>
-</div>
+
 <div style="position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem;
-  margin: 0 auto;
-  text-align:center;
-  padding:0;">
-Made with <span style="color: #e25555;" >&#9829;</span> by <a href="https://www.linkedin.com/in/pushkara-sharma/">Pushkara Sharma</a> 
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    margin: 0 auto;
+    text-align:center;
+    padding:0;">
+    Made with <span style="color: #e25555;">&#9829;</span> by <a
+        href="https://www.linkedin.com/in/pushkara-sharma/">Pushkara Sharma</a>
 </div>
 {% endblock %}
