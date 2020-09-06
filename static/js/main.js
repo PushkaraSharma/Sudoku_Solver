@@ -46,7 +46,7 @@ $(document).ready(function () {
                 $('.loader').hide();
                 
                 $('#result').text(' Result:');
-                $('#result').append('<img id="theImg" src="/static/outputs/1.jpeg.jpg" />')
+                $('#result').append('<br><img class="img-preview" src="/static/outputs/'+data+'" />')
                 $('#result').fadeIn(600);
                 console.log('Success!');
             },

@@ -37,10 +37,10 @@ def upload():
         # Make prediction
         output = print_to_image(file_path)
         if(type(output)==str):
-            return send_file('outputs/error.png')
+            return 'error.png'
         else:
-            cv2.imwrite('outputs/'+f.filename+'.jpg', output)
-            return send_file('outputs/'+f.filename+'.jpg')
+            cv2.imwrite('static/outputs/'+f.filename, output)
+            return f.filename
 
            
     return None
