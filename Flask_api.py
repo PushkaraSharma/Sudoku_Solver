@@ -5,12 +5,10 @@ Created on Thu Sep  3 17:22:24 2020
 
 @author: pushkara
 """
-from flask import Flask,send_file, request, render_template
+from flask import Flask,request, render_template
 from werkzeug.utils import secure_filename
-from gevent.pywsgi import WSGIServer
 import os
 from image_processing import print_to_image
-from io import StringIO
 import cv2
 
 app = Flask(__name__)
@@ -48,4 +46,4 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(host='0.0.0.0',port=5000)
