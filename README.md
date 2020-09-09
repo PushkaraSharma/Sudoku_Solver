@@ -13,7 +13,7 @@ machine learning (CNN) for digit recognition and finally GUI.
 * Predicting each image - CNN model is trained on mnist daatset of handwritten digits and 98% acracy is achieved on validation set but somehow
 the model is not giving perfect predictions. Hence,project is not completed yet.
 
-### Results
+### IN Process Images
 #### Input Image
 ![input](https://user-images.githubusercontent.com/46081301/78917426-77bc1580-7aac-11ea-8fd2-29349c52f9dd.JPG)
 
@@ -29,12 +29,19 @@ the model is not giving perfect predictions. Hence,project is not completed yet.
 ![c2](https://user-images.githubusercontent.com/46081301/78917450-7db1f680-7aac-11ea-958c-ed15de5c10d6.JPG)
 ![c3](https://user-images.githubusercontent.com/46081301/78917457-7ee32380-7aac-11ea-819b-c47343634082.JPG)
 
-#### Sudoku_Algorithm_input(Not the same image from above)
-![Capture1](https://user-images.githubusercontent.com/46081301/78917367-67a43600-7aac-11ea-9b6e-ccdfd1f4ca49.JPG)
-
 #### Output
-![Capture2](https://user-images.githubusercontent.com/46081301/78917393-6ffc7100-7aac-11ea-955c-42924a0e0b7b.JPG)
+![1](https://user-images.githubusercontent.com/46081301/92573329-446ff380-f2a3-11ea-8cc3-88fe927e270d.jpeg)
 
-### Note
-The final output is displayed only to show that algorithm works fine but the problem is with CNN prediction.
-### I will try my best to complete it as soon as possible.
+
+## Web App
+![Screenshot from 2020-09-09 13-50-24](https://user-images.githubusercontent.com/46081301/92573520-8ac55280-f2a3-11ea-94ba-e3faed5733c6.png)
+![Screenshot from 2020-09-09 13-50-48](https://user-images.githubusercontent.com/46081301/92573530-8d27ac80-f2a3-11ea-991a-cda0d67075ad.png)
+![Screenshot from 2020-09-09 13-51-07](https://user-images.githubusercontent.com/46081301/92573542-9153ca00-f2a3-11ea-9346-07d6729ffdcb.png)
+
+## Video Demo 
+[<img src="https://img.youtube.com/vi/r8ZjVVI6AtU/maxresdefault.jpg" width="50%">](https://youtu.be/r8ZjVVI6AtU)
+
+#### Docker Image Pull Command
+docker pull pushkarasharma11/sudoku_solver:1.0
+
+
