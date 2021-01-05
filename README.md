@@ -2,6 +2,9 @@
 The following project aims to develop the gui based app that can be used to solve sudoku by just taking the image from user's mobile camera and give the 
 solution instantly.
 
+## Try yourself at
+https://sudoku-solv.herokuapp.com/
+
 ### Why this project is important?
 This project is good enough to be in someone's resume because it comprises of algorithms(backtracking), Image processing(extraction of sudoku and numbers) 
 machine learning (CNN) for digit recognition and finally GUI.
